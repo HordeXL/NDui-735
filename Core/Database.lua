@@ -1,5 +1,6 @@
 local _, _, L, DB = unpack(select(2, ...))
-DB.Version = GetAddOnMetadata("NDui", "Version")
+-- DB.Version = GetAddOnMetadata("NDui", "Version")
+DB.Version = "20251005-3"
 DB.Support = GetAddOnMetadata("NDui", "X-Support")
 DB.Client = GetLocale()
 
