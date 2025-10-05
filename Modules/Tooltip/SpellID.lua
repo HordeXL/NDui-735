@@ -7,6 +7,7 @@ local types = {
 	talent = TALENT.."ID:",
 	achievement = ACHIEVEMENTS.."ID:",
 	currency = CURRENCY.."ID:",
+	npc = "NPC:",
 }
 
 local function addLine(self, id, type, noadd)
@@ -118,3 +119,17 @@ local function SetCaster(self, unit, index, filter)
 	end
 end
 hooksecurefunc(GameTooltip, "SetUnitAura", SetCaster)
+
+-- NPC ID
+GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+	local _, unit = self:GetUnit()
+	if unit then
+		local guid = UnitGUID(unit)
+		if guid then
+			local unitType, _, _, _, _, npcID = strsplit("-", guid)
+			if unitType == "Creature" or unitType == "Vehicle" then
+				addLine(self, npcID, types.npc)
+			end
+		end
+	end
+end)
